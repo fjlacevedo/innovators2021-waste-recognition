@@ -1,5 +1,7 @@
 # Innovators 2021 - Hack reto Onesait Platform
 
+![cover_innovators_2021_fjlacevedo](https://user-images.githubusercontent.com/55378589/125307550-6fe2c500-e330-11eb-8a30-7e78c35f6185.jpg)
+
 ## Detección y reconocimiento de acumulación de basura en islas de reciclaje
 
 Esta idea busca poder detectar la acumulación de residuos de diversa índole en el perímetro de los contenedores de reciclaje, reconociendo cuando se encuentran limpios de basura aledaña, o por el contrario se requiere de su limpieza por parte de los agentes de limpieza.
