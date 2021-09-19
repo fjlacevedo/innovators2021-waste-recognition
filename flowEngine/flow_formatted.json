@@ -1,0 +1,321 @@
+[
+    {
+        "id": "216fe3d.276541c",
+        "type": "tab",
+        "label": "Dumpsters",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "8c740a05.4194a8",
+        "type": "mqtt out",
+        "z": "216fe3d.276541c",
+        "name": "",
+        "topic": "business/TEAM_8/ENT/server",
+        "qos": "1",
+        "retain": "",
+        "broker": "7fe8ba90.dc8d34",
+        "x": 570,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "53ceab0b.51a1c4",
+        "type": "function",
+        "z": "216fe3d.276541c",
+        "name": "Payload",
+        "func": "\nvar json='{\"frec\":222}'\n\nmsg.payload=JSON.parse(json)\nreturn msg;\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 340,
+        "y": 180,
+        "wires": [
+            [
+                "8c740a05.4194a8"
+            ]
+        ]
+    },
+    {
+        "id": "c7c51b07.ea7588",
+        "type": "inject",
+        "z": "216fe3d.276541c",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 170,
+        "y": 180,
+        "wires": [
+            [
+                "53ceab0b.51a1c4"
+            ]
+        ]
+    },
+    {
+        "id": "fcf674b7.cd2718",
+        "type": "onesaitplatform-query-static",
+        "z": "216fe3d.276541c",
+        "name": "",
+        "ontology": "innovators2021_waste_recognition",
+        "targetDB": "",
+        "queryType": "native",
+        "query": "db.innovators2021_waste_recognition.update({'id': 'IG_03_050'},{$set:{'status.alarm':true,'status.image':'asasa'}})",
+        "authentication": "SU4yMVRFQU1fODp1WkFXWkxJRlhaREVERmZvMDlkTnNHSVBaakYxUGhWTGlScXl5eUtOOTIwPTpvbmVzYWl0cGxhdGZvcm1fY29uZmln",
+        "x": 400,
+        "y": 700,
+        "wires": [
+            [
+                "e96c79b8.c94858"
+            ]
+        ]
+    },
+    {
+        "id": "1dc78f11.1d0961",
+        "type": "inject",
+        "z": "216fe3d.276541c",
+        "name": "Fake JSON",
+        "topic": "",
+        "payload": "{\"metadata\":{\"id\":\"IG_03_050\",\"type\":[\"VIDRIO\",\"PAPEL-CARTON\"],\"id_district\":\"03\",\"district\":\"Retiro\",\"id_neighborhood\":\"032\",\"neighborhood\":\"Adelfas\",\"address_type\":\"Calle\",\"address_name\":\"Hermanos Ruiz\",\"address_number\":\"1\"},\"position\":{\"longitude\":-3.6743628,\"latitude\":40.4003953},\"status\":{\"updated\":\"2021-07-13T00:00:00Z\",\"supervised\":true,\"alarm\":true,\"image\":\"\"}}",
+        "payloadType": "json",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 170,
+        "y": 700,
+        "wires": [
+            [
+                "fcf674b7.cd2718"
+            ]
+        ]
+    },
+    {
+        "id": "e96c79b8.c94858",
+        "type": "debug",
+        "z": "216fe3d.276541c",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 610,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "7839213d.18c98",
+        "type": "debug",
+        "z": "216fe3d.276541c",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 330,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "c829d777.147398",
+        "type": "mqtt in",
+        "z": "216fe3d.276541c",
+        "name": "M5Stick:connector",
+        "topic": "business/TEAM_8/ENT/server",
+        "qos": "1",
+        "datatype": "json",
+        "broker": "77bfdb88.f4b384",
+        "x": 170,
+        "y": 340,
+        "wires": [
+            [
+                "5addd149.57dac",
+                "f8068aaf.9e7658"
+            ]
+        ]
+    },
+    {
+        "id": "5addd149.57dac",
+        "type": "debug",
+        "z": "216fe3d.276541c",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 370,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "f8068aaf.9e7658",
+        "type": "function",
+        "z": "216fe3d.276541c",
+        "name": "From Device to Ontology",
+        "func": "var id = msg.payload.dumpsterId;\nvar alarm = msg.payload.alarm === 'True';\nvar image = msg.payload.image;\nvar d = new Date();\n\nmsg.ontology= \"innovators2021_waste_recognition\";\nmsg.queryType=\"NATIVE\";\n\nvar query = \"db.innovators2021_waste_recognition.update({'id': '\"+id+\"'},{$set:{'status.alarm':\"+alarm+\",'status.image':'\" + image.toString() + \"','status.updated':'\"+d.toISOString()+\"'}})\";\nmsg.query=query;\n\nmsg.insertData = {};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 430,
+        "y": 380,
+        "wires": [
+            [
+                "57f8b13c.3f6c6"
+            ]
+        ]
+    },
+    {
+        "id": "57f8b13c.3f6c6",
+        "type": "onesaitplatform-query-dynamic",
+        "z": "216fe3d.276541c",
+        "name": "",
+        "authentication": "SU4yMVRFQU1fODp1WkFXWkxJRlhaREVERmZvMDlkTnNHSVBaakYxUGhWTGlScXl5eUtOOTIwPTpvbmVzYWl0cGxhdGZvcm1fY29uZmln",
+        "x": 710,
+        "y": 380,
+        "wires": [
+            [
+                "a64b4698.ef65d8"
+            ]
+        ]
+    },
+    {
+        "id": "a64b4698.ef65d8",
+        "type": "debug",
+        "z": "216fe3d.276541c",
+        "name": "¿Qué se recibe?",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 970,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "b60d79f2.1c6b48",
+        "type": "onesaitplatform-insert",
+        "z": "216fe3d.276541c",
+        "name": "Insert New Value",
+        "ontology": "innovators2021_waste_recognition",
+        "authentication": "SU4yMVRFQU1fODp1WkFXWkxJRlhaREVERmZvMDlkTnNHSVBaakYxUGhWTGlScXl5eUtOOTIwPTpvbmVzYWl0cGxhdGZvcm1fY29uZmln",
+        "x": 170,
+        "y": 660,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "152c7568.5a2ffb",
+        "type": "comment",
+        "z": "216fe3d.276541c",
+        "name": "Focus here!",
+        "info": "Esto es lo que funciona; lo otro son pruebas de concepto y demás.",
+        "x": 150,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "8227b6f0.2ed378",
+        "type": "comment",
+        "z": "216fe3d.276541c",
+        "name": "Ingesta manual",
+        "info": "Para comprobar que se reciben cosas.",
+        "x": 160,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "afb2ba79.7d6f78",
+        "type": "comment",
+        "z": "216fe3d.276541c",
+        "name": "Nada que ver por aquí",
+        "info": "Ignorad esta parte, que son pruebas e ideas futuras.",
+        "x": 180,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "7fe8ba90.dc8d34",
+        "type": "mqtt-broker",
+        "z": "",
+        "name": "",
+        "broker": "iothub02.onesaitplatform.com",
+        "port": "8883",
+        "tls": "1622391e.6ee057",
+        "clientid": "b_TEAM_8_CONNECTOR",
+        "usetls": true,
+        "compatmode": false,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    },
+    {
+        "id": "77bfdb88.f4b384",
+        "type": "mqtt-broker",
+        "z": "",
+        "name": "",
+        "broker": "iothub02.onesaitplatform.com",
+        "port": "8883",
+        "tls": "8a7bd1ac.8befd",
+        "clientid": "b_TEAM_8",
+        "usetls": true,
+        "compatmode": false,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    },
+    {
+        "id": "1622391e.6ee057",
+        "type": "tls-config",
+        "z": "",
+        "name": "",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "",
+        "keyname": "",
+        "caname": "",
+        "servername": "",
+        "verifyservercert": false
+    },
+    {
+        "id": "8a7bd1ac.8befd",
+        "type": "tls-config",
+        "z": "",
+        "name": "",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "",
+        "keyname": "",
+        "caname": "",
+        "servername": "",
+        "verifyservercert": false
+    }
+]
