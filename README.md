@@ -31,3 +31,29 @@ Aquellos contenedores que presenten un estado normal se representarán de con un
 Además, aquellos contenedores que tengan fotografía contendrán un icono adicional de una cámara dentro de un círculo blanco. Si carecen de ella, no mostrarán dicho icono.
 
 ![symbology_fjlacevedo](https://user-images.githubusercontent.com/55378589/133936519-461a31c1-774d-4bc7-b028-ad861eca6867.png)
+
+
+---
+
+## Dispositivo de captura de datos
+
+Para la obtención del estado de los contenedores, así como de una imagen del mismo, se ha utilizado un dispositivo M5StickV (que contienen un chip Kendryte K210 para procesado de visión artificial). Tanto la detección del estado de los contenedores como la imagen es transmitida vía cable a un dispositivo M5StickC, que es el que se ocupa de conectarse a internet, negociar la conexión MQTT y mandar la información recibida a la Onesait Platform para su ingesta en una entidad de registro.
+
+El dispositivo M5StickC se ha configurado para mostrar en pantalla una serie de información que permita al usuario conocer en todo momento lo que ocurre.
+
+### Inicialización del dispositivo
+
+![img_m5_01](https://user-images.githubusercontent.com/55378589/134138428-a15c98b8-027c-4f07-98a6-95c2c0761916.jpg)
+
+
+### Conexión exitosa a la red WiFi
+
+![img_m5_02](https://user-images.githubusercontent.com/55378589/134138465-6e102a07-24a6-470b-bf73-8d20c13f41f9.jpg)
+
+
+### Dispositivo en espera de recibir datos de manera automática desde el M5StickV
+
+![img_m5_03](https://user-images.githubusercontent.com/55378589/134138510-8fa88860-c98e-4f9e-9bf4-7ba34bcb6a16.jpg)
+
+
+El UI del M5StickV no se ha modificado por falta de tiempo, más hayá de mostrar información de cuando se ha tomado una foto, y de si se ha detectado un contenedor que presenta una alarma de suciedad o no.
