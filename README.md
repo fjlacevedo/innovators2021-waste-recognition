@@ -19,8 +19,8 @@ El panel de mando se encuentra disponible en la siguiente dirección: https://la
 ![webproject_login_fjlacevedo](https://user-images.githubusercontent.com/55378589/133936164-08dfa0d9-7522-4f11-98e7-a2359118afa1.png)
 
 Los datos de acceso son los siguientes:
-- **Usuario**: inner_waste
-- **Contraseña**: inner_Waste_2001
+- **Usuario**: inno_waste
+- **Contraseña**: inno_Waste_2001
 
 ![webproject_index_fjlacevedo](https://user-images.githubusercontent.com/55378589/133936517-16337219-c888-4a60-8588-aaf049b5e433.png)
 
