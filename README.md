@@ -56,4 +56,4 @@ El dispositivo M5StickC se ha configurado para mostrar en pantalla una serie de 
 ![img_m5_03](https://user-images.githubusercontent.com/55378589/134138510-8fa88860-c98e-4f9e-9bf4-7ba34bcb6a16.jpg)
 
 
-El UI del M5StickV no se ha modificado por falta de tiempo, más hayá de mostrar información de cuando se ha tomado una foto, y de si se ha detectado un contenedor que presenta una alarma de suciedad o no.
+El UI del M5StickV no se ha modificado por falta de tiempo, más allá de mostrar información de cuando se ha tomado una foto, y de si se ha detectado un contenedor que presenta una alarma de suciedad o no.
